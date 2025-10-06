@@ -15,7 +15,7 @@
                 <div class="text-start">
                     <h6 class="text-uppercase fw-semibold mb-0" style="font-size: 0.85rem;">Email Us</h6>
                     <span style="font-size: 0.8rem;">{{ $contacts?->email ?? 'Email belum tersedia' }}
-</span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -35,9 +35,14 @@
     <!-- Navbar Start -->
     <div class="container-fluid sticky-top bg-dark bg-light-radial shadow-sm px-5 pe-lg-0">
         <nav class="navbar navbar-expand-lg bg-dark bg-light-radial navbar-dark py-3 py-lg-0">
-            <a href="{{route('home')}}" class="navbar-brand">
-                <h2 class="m-0 display-4 text-uppercase text-white"><i class="bi bi-building text-primary me-2"></i>KSP</h2>
+           <a href="{{ route('home') }}" class="navbar-brand">
+                <h2 class="m-0 text-uppercase text-white lh-1" style="font-size: 2rem;">
+                    <i class="bi bi-building text-primary me-2"></i>KSP
+                    <small class="d-block text-white-50" style="font-size: 0.9rem;">Kontraktor</small>
+                </h2>
             </a>
+
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
             </button>
