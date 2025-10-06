@@ -210,44 +210,50 @@
                     Mengapa <span class="text-primary">Harus</span> Memilih Kami?
                 </h1>
             </div>
+
             <div class="row g-4">
                 <div class="col-lg-4 col-md-6 text-center">
-                    <div class="p-4 shadow-sm rounded bg-white h-100">
+                    <div class="feature-box p-4 shadow-sm rounded bg-white h-100">
                         <i class="fas fa-user-tie fa-3x text-primary mb-3"></i>
                         <h5 class="fw-bold">Tenaga Ahli</h5>
                         <p class="text-muted mb-0">Tim berpengalaman dan profesional di bidangnya.</p>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-6 text-center">
-                    <div class="p-4 shadow-sm rounded bg-white h-100">
+                    <div class="feature-box p-4 shadow-sm rounded bg-white h-100">
                         <i class="fas fa-money-bill-wave fa-3x text-primary mb-3"></i>
                         <h5 class="fw-bold">Harga Murah</h5>
                         <p class="text-muted mb-0">Solusi terbaik dengan biaya yang tetap terjangkau.</p>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-6 text-center">
-                    <div class="p-4 shadow-sm rounded bg-white h-100">
+                    <div class="feature-box p-4 shadow-sm rounded bg-white h-100">
                         <i class="fas fa-pencil-ruler fa-3x text-primary mb-3"></i>
                         <h5 class="fw-bold">Gratis Design</h5>
                         <p class="text-muted mb-0">Kami menyediakan design gratis sesuai kebutuhan Anda.</p>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-6 text-center">
-                    <div class="p-4 shadow-sm rounded bg-white h-100">
+                    <div class="feature-box p-4 shadow-sm rounded bg-white h-100">
                         <i class="fas fa-map fa-3x text-primary mb-3"></i>
                         <h5 class="fw-bold">Gratis Survey</h5>
                         <p class="text-muted mb-0">Survey lokasi tanpa biaya tambahan.</p>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-6 text-center">
-                    <div class="p-4 shadow-sm rounded bg-white h-100">
+                    <div class="feature-box p-4 shadow-sm rounded bg-white h-100">
                         <i class="fas fa-check fa-3x text-primary mb-3"></i>
                         <h5 class="fw-bold">Berkualitas</h5>
                         <p class="text-muted mb-0">Material terbaik dan standar pengerjaan tinggi.</p>
                     </div>
                 </div>
+
                 <div class="col-lg-4 col-md-6 text-center">
-                    <div class="p-4 shadow-sm rounded bg-white h-100">
+                    <div class="feature-box p-4 shadow-sm rounded bg-white h-100">
                         <i class="fas fa-award fa-3x text-primary mb-3"></i>
                         <h5 class="fw-bold">Bergaransi</h5>
                         <p class="text-muted mb-0">Kami memberikan garansi sebagai bentuk tanggung jawab.</p>
