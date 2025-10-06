@@ -107,8 +107,12 @@
         <div class="container-fluid py-6 px-5">
             <div class="row g-5">
                 <div class="col-lg-7">
-                    <h1 class="display-5 text-uppercase mb-4"><span class="text-primary">terdepan</span> dalam Industri Konstruksi</h1>
-                    <h4 class="text-uppercase mb-3 text-body">Partner Terpercaya untuk Membangun Impian Anda</h4>
+                    <h1 class="display-5 text-uppercase mb-4">
+                        <span class="text-primary">terdepan</span> dalam Industri Konstruksi
+                    </h1>
+                    <h4 class="text-uppercase mb-3 text-body">
+                        Partner Terpercaya untuk Membangun Impian Anda
+                    </h4>
                     <p>
                         <strong>KSP Kontraktor</strong> memahami bahwa setiap proyek adalah investasi berharga. Dengan komitmen pada kualitas dan ketepatan waktu, kami siap mewujudkan visi konstruksi Anda menjadi kenyataan yang kokoh dan fungsional.
                     </p>
@@ -131,6 +135,39 @@
         </div>
         <!-- About End -->
 
+        <div class="container-fluid py-6 px-5">
+            <div class="row text-center mt-5">
+                <div class="col-md-4 mb-4">
+                    <div class="p-4 bg-light rounded-3 shadow-sm">
+                        <div class="mb-3">
+                            <i class="fa fa-building fa-3x text-primary"></i>
+                        </div>
+                        <h2 class="text-primary mb-1 counter" data-target="115">0</h2>
+                        <p class="fw-bold mb-0">Total Projects</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="p-4 bg-light rounded-3 shadow-sm">
+                        <div class="mb-3">
+                            <i class="fa fa-users fa-3x text-primary"></i>
+                        </div>
+                        <h2 class="text-primary mb-1 counter" data-target="85">0</h2>
+                        <p class="fw-bold mb-0">Happy Clients</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-4">
+                    <div class="p-4 bg-light rounded-3 shadow-sm">
+                        <div class="mb-3">
+                            <i class="fa fa-clock fa-3x text-primary"></i>
+                        </div>
+                        <h2 class="text-primary mb-1 counter" data-target="10">0</h2>
+                        <p class="fw-bold mb-0">Years of Experience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Services Start -->
         <div class="container-fluid bg-light py-6 px-5">
@@ -371,6 +408,41 @@
             loop: true,
             zoomable: true,
         });
+    </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const counters = document.querySelectorAll(".counter");
+        const speed = 150;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute("data-target");
+                    const count = +counter.innerText.replace('+', '');
+                    const increment = target / speed;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + increment) + "+";
+                        setTimeout(updateCount, 20);
+                    } else {
+                        counter.innerText = target + "+";
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.disconnect();
+                }
+            });
+        });
+
+        observer.observe(document.querySelector(".counter"));
+    });
     </script>
 
     <style>
