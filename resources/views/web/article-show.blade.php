@@ -101,7 +101,7 @@
 
                  <div class="text-muted small mb-4">
                     <span class="badge bg-primary me-2">{{ $post->category->name ?? 'Uncategorized' }}</span><br />
-                    <span><i>{{ $post->author ?? 'Admin' }} - {{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d F Y') }}</i></span>
+                    <span><i>{{ $post->user->name ?? 'Admin' }} - {{ \Carbon\Carbon::parse($post->created_at)->translatedFormat('d F Y') }}</i></span>
                 </div>
 
                 <!-- Konten Artikel -->
