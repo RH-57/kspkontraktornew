@@ -20,7 +20,7 @@ class ProcedureController
     public function store(Request $request) {
         $request->validate([
             'no'            => 'required|string|unique:procedures,no',
-            'title'         => 'required|string|max:50',
+            'title'         => 'required|string|max:150',
             'description'   => 'required|string',
         ]);
 
@@ -45,7 +45,7 @@ class ProcedureController
 
         $request->validate([
             'no'            => 'required|string|unique:procedures,no,' . $id,
-            'title'         => 'required|string|max:50',
+            'title'         => 'required|string|max:150',
             'description'   => 'required|string',
         ]);
 
