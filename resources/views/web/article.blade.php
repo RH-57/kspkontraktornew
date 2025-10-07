@@ -62,7 +62,7 @@
                 <div class="card article-card h-100 border-0 shadow-sm rounded-3 overflow-hidden">
                     <!-- Gambar Artikel -->
                     <div class="position-relative">
-                    <img src="{{ $article->featured_image ? asset('/' . $article->featured_image) : asset('default.jpg') }}"
+                    <img src="{{ $article->featured_image ? asset('storage/' . $article->featured_image) : asset('default.jpg') }}"
                         class="card-img-top"
                         alt="{{ $article->title }}"
                         style="height: 230px; object-fit: cover;">
