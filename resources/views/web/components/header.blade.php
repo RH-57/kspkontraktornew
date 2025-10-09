@@ -36,7 +36,7 @@
     <div class="container-fluid sticky-top bg-dark bg-light-radial shadow-sm px-5 pe-lg-0">
         <nav class="navbar navbar-expand-lg bg-dark bg-light-radial navbar-dark py-3 py-lg-0">
            <a href="{{ route('home') }}" class="navbar-brand"
-            style="display: flex; align-items: center; height: 60px;">
+            style="display: flex; align-items: center; height: 60px; padding-left: 13px;">
                 <img src="{{ asset('assets/web/img/logo.png') }}"
                     alt="KSP Kontraktor"
                     style="height: 45px; transform: scale(1.9); transform-origin: center; transition: transform 0.3s ease;">
