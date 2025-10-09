@@ -1,13 +1,13 @@
 <div class="row g-5">
             <div class="col-lg-6 pe-lg-5">
-                <a href="{{ route('home') }}" class="navbar-brand">
-                    <h2 class="m-0 text-uppercase text-white lh-1" style="font-size: 2rem;">
-                        <i class="bi bi-building text-primary me-2"></i>KSP
-                        <small class="d-block text-white-50" style="font-size: 0.9rem;">Kontraktor</small>
-                    </h2>
+                <a href="{{ route('home') }}" class="navbar-brand d-inline-block mb-3"
+                style="display: flex; align-items: center;">
+                    <img src="{{ asset('assets/web/img/logo.png') }}"
+                        alt="KSP Kontraktor"
+                        style="height: 90px; object-fit: contain;">
                 </a>
 
-                <p>Kami adalah partner terpercaya Anda dalam mewujudkan bangunan yang kokoh, estetis, dan berfungsi dengan sempurna. Dengan dedikasi penuh terhadap kualitas dan ketepatan waktu, setiap proyek adalah komitmen kami.</p>
+                <p>Kami adalah partner terpercaya dalam mewujudkan struktur baja yang kokoh, presisi, dan efisien. Dengan komitmen pada kualitas material dan ketepatan waktu, setiap proyek adalah cerminan standar ketangguhan tertinggi.</p>
                 <p><i class="fa fa-map-marker-alt me-2"></i>{{$contacts->address}}</p>
                 <p><i class="fa fa-phone-alt me-2"></i>{{$contacts->phone}}</p>
                 <p><i class="fa fa-envelope me-2"></i>{{$contacts->email}}</p>

@@ -71,7 +71,7 @@
                         <img class="w-100" src="{{asset('assets/web/img/carousel-1.jpg')}}" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 900px;">
-                                <i class="fa fa-home fa-4x text-primary mb-4 d-none d-sm-block"></i>
+                                <i class="fa fa-building fa-4x text-primary mb-4 d-none d-sm-block"></i>
                                 <h1 class="display-2 text-uppercase text-white mb-md-4">Bangun Impian Anda Bersama Kami</h1>
                                 <a href="https://wa.me/{{$contacts->phone}}?text=Saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20minta%20penawaran?" target="_blank" class="btn btn-primary py-md-3 px-md-5 mt-2">Minta Penawaran</a>
                             </div>
@@ -108,23 +108,29 @@
             <div class="row g-5">
                 <div class="col-lg-7">
                     <h1 class="display-5 text-uppercase mb-4">
-                        <span class="text-primary">terdepan</span> dalam Industri Konstruksi
+                        <span class="text-primary">terdepan</span> dalam Industri Konstruksi Baja
                     </h1>
                     <h4 class="text-uppercase mb-3 text-body">
-                        Partner Terpercaya untuk Membangun Impian Anda
+                        Partner Terpercaya untuk Mewujudkan Visi Anda
                     </h4>
                     <p>
-                        <strong>KSP Kontraktor</strong> memahami bahwa setiap proyek adalah investasi berharga. Dengan komitmen pada kualitas dan ketepatan waktu, kami siap mewujudkan visi konstruksi Anda menjadi kenyataan yang kokoh dan fungsional.
+                        <strong>KSP Kontraktor</strong> memahami bahwa setiap proyek konstruksi baja adalah investasi berharga dan memerlukan presisi. Dengan tim yang profesional dan komitmen kuat pada kualitas, ketepatan waktu, serta efisiensi, kami siap mewujudkan visi konstruksi Anda menjadi kenyataan yang kokoh, aman, dan fungsional.
                     </p>
                     <p>Keunggulan Layanan Kami:</p>
                     <div class="row gx-5 py-2">
-                        <div class="col-sm-6 mb-2">
-                            <p class="fw-bold mb-2"><i class="fa fa-check text-primary me-3"></i>Perencanaan Detail</p>
-                            <p class="fw-bold mb-2"><i class="fa fa-check text-primary me-3"></i>Tim Profesional</p>
-                            <p class="fw-bold mb-2"><i class="fa fa-check text-primary me-3"></i>Proses Transparan</p>
+                        <div class="col-sm-12 d-flex flex-wrap gap-4">
+                            <div class="d-flex flex-column me-4">
+                                <p class="fw-bold mb-2"><i class="fa fa-check text-primary me-2"></i>Perencanaan Detail</p>
+                                <p class="fw-bold mb-2"><i class="fa fa-check text-primary me-2"></i>Kualitas Terbaik</p>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <p class="fw-bold mb-2"><i class="fa fa-check text-primary me-2"></i>Tim Profesional</p>
+                                <p class="fw-bold mb-2"><i class="fa fa-check text-primary me-2"></i>Proses Transparan</p>
+                            </div>
                         </div>
                     </div>
-                    <p class="mb-4">Percayakan pembangunan properti impian Anda kepada kami - dari konsep hingga penyelesaian akhir.</p>
+
+                    <p class="mb-4">Bersama KSP Kontraktor, wujudkan struktur impian yang menjulang dengan presisi dan ketahanan konstruksi baja yang terdepan.</p>
                 </div>
                 <div class="col-lg-5 pb-5" style="min-height: 400px;">
                     <div class="position-relative bg-dark-radial h-100 ms-5">

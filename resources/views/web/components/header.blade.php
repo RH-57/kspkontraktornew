@@ -35,12 +35,13 @@
     <!-- Navbar Start -->
     <div class="container-fluid sticky-top bg-dark bg-light-radial shadow-sm px-5 pe-lg-0">
         <nav class="navbar navbar-expand-lg bg-dark bg-light-radial navbar-dark py-3 py-lg-0">
-           <a href="{{ route('home') }}" class="navbar-brand">
-                <h2 class="m-0 text-uppercase text-white lh-1" style="font-size: 2rem;">
-                    <i class="bi bi-building text-primary me-2"></i>KSP
-                    <small class="d-block text-white-50" style="font-size: 0.9rem;">Kontraktor</small>
-                </h2>
+           <a href="{{ route('home') }}" class="navbar-brand"
+            style="display: flex; align-items: center; height: 60px;">
+                <img src="{{ asset('assets/web/img/logo.png') }}"
+                    alt="KSP Kontraktor"
+                    style="height: 45px; transform: scale(1.9); transform-origin: center; transition: transform 0.3s ease;">
             </a>
+
 
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
