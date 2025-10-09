@@ -71,9 +71,6 @@
                 <div class="card info-card customers-card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title">
-                                Show <span>| Message</span>
-                            </h5>
                             <div class="card-body">
                                 <h5 class="card-title">Detail Pesan</h5>
 
@@ -87,11 +84,11 @@
                                         <td>{{ $message->email }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Subject</th>
+                                        <th>Subjek</th>
                                         <td>{{ $message->subject }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Message</th>
+                                        <th>Pesan</th>
                                         <td>{{ $message->message }}</td> {{-- aman karena {{ }} --}}
                                     </tr>
                                     <tr>
@@ -99,7 +96,7 @@
                                         <td>{{ $message->ip_address }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Created At</th>
+                                        <th>Diterima</th>
                                         <td>{{ $message->created_at->format('d M Y H:i') }}</td>
                                     </tr>
                                 </table>
