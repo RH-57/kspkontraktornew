@@ -65,8 +65,8 @@
                 <div class="contact-form bg-light p-5">
                       <form action="{{ route('webcontact.store') }}" method="POST">
                         @csrf
+                        @honeypot
                         <div class="row g-3">
-                            <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
                             <div class="col-12 col-sm-6">
                                 <input type="text" name="name" class="form-control border-0" placeholder="Your Name" style="height: 55px;" required>
                             </div>
@@ -125,14 +125,6 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('assets/web/js/main.js')}}"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
-    <script>
-        grecaptcha.ready(function() {
-            grecaptcha.execute("{{ env('RECAPTCHA_SITE_KEY') }}", {action: 'contact'}).then(function(token) {
-                document.getElementById('g-recaptcha-response').value = token;
-            });
-        });
-    </script>
 </body>
 
 </html>

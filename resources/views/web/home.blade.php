@@ -6,7 +6,7 @@
     <title>Home - PT. Karya Solusi Pembangunan</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
      <!-- Meta Deskripsi -->
-    <meta name="description" content="PT. Karya Solusi Pembangunan adalah kontraktor profesional terpercaya yang menyediakan layanan konstruksi, renovasi, dan pembangunan dengan kualitas terbaik serta harga terjangkau.">
+    <meta name="description" content="PT. Karya Solusi Pembangunan adalah spesialis kontraktor baja terpercaya yang menghadirkan solusi lengkap untuk konstruksi, fabrikasi, dan ereksi struktur baja. Kami menjamin kualitas terbaik dengan presisi tinggi dan material unggulan.">
 
     <!-- Meta Keywords -->
     <meta name="keywords" content="kontraktor, jasa kontraktor, jasa bangun rumah, renovasi rumah, kontraktor profesional, pembangunan gedung, jasa konstruksi, PT. Karya Solusi Pembangunan">

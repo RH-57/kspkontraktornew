@@ -25,24 +25,7 @@ class ContactController
             'email'   => 'required|email|max:100',
             'subject' => 'required|string|max:150',
             'message' => 'required|string|max:1000',
-            'g-recaptcha-response' => 'required', // wajib ada token reCAPTCHA
         ]);
-
-        // 🔹 Verifikasi token ke Google
-        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret'   => env('RECAPTCHA_SECRET_KEY'),
-            'response' => $request->input('g-recaptcha-response'),
-            'remoteip' => $request->ip(),
-        ]);
-
-        $result = $response->json();
-
-        // 🔹 Cek hasil validasi reCAPTCHA
-        if (!($result['success'] ?? false) || ($result['score'] ?? 0) < 0.5) {
-            return back()->withErrors([
-                'captcha' => 'Captcha verification failed, please try again.',
-            ])->withInput();
-        }
 
         // 🔹 Simpan pesan ke database
         Message::create([
@@ -54,7 +37,7 @@ class ContactController
         ]);
 
         return redirect()
-            ->route('contact.index')
+            ->route('contact')
             ->with('success', 'Pesan berhasil dikirim!');
     }
 }
