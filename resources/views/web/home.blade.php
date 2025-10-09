@@ -190,8 +190,8 @@
                             alt="{{ $service->title }}"
                             style="width: 100%; height: 250px; object-fit: cover; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;"
                         />
-                        <div class="service-icon bg-white">
-                            <i class="fa fa-3x fa-tools text-primary"></i>
+                        <div class="service-icon">
+
                         </div>
                         <div class="px-4 pb-4 d-flex flex-column flex-grow-1">
                             <h4 class="text-uppercase mb-3">{{ $service->title }}</h4>
