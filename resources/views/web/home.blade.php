@@ -72,7 +72,7 @@
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 900px;">
                                 <i class="fa fa-building fa-4x text-primary mb-4 d-none d-sm-block"></i>
-                                <h1 class="display-2 text-uppercase text-white mb-md-4">Bangun Impian Anda Bersama Kami</h1>
+                                <h1 class="text-uppercase text-white mb-md-4">Konstruksi Baja, Konstruksi Sipil & Desain Arsitektur</h1>
                                 <a href="https://wa.me/{{$contacts->phone}}?text=Saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20minta%20penawaran?" target="_blank" class="btn btn-primary py-md-3 px-md-5 mt-2">Minta Penawaran</a>
                             </div>
                         </div>
@@ -82,7 +82,7 @@
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 900px;">
                                 <i class="fa fa-tools fa-4x text-primary mb-4 d-none d-sm-block"></i>
-                                <h1 class="display-2 text-uppercase text-white mb-md-4">Terpercaya untuk Setiap Proyek</h1>
+                                <h1 class="text-uppercase text-white mb-md-4">Spesialis Kontraktor Konstruksi Gudang, Pabrik, Rumah & Lapangan.</h1>
                                 <a href="https://wa.me/{{$contacts->phone}}?text=Saya%20ingin%20konsultasi%20dengan%20Anda%20tentang%20jasa%20kontraktor?" target="_blank" class="btn btn-primary py-md-3 px-md-5 mt-2">Konsultasi Gratis</a>
                             </div>
                         </div>
