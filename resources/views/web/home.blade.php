@@ -188,7 +188,7 @@
                             class="img-fluid"
                             src="{{ asset('storage/' .$service->image) }}"
                             alt="{{ $service->title }}"
-                            style="width: 100%; height: 250px; object-fit: cover; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;"
+                            style="width:100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; display:block;"
                         />
                         <div class="service-icon">
 

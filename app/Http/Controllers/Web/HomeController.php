@@ -15,7 +15,7 @@ class HomeController
     public function index() {
         $contacts = Contact::first();
         $services = Service::where('status', '1')->get();
-        $projects = Project::with('images')->latest()->take(6)->get();
+        $projects = Project::with('images')->orderByDesc('year')->take(6)->get();
         $testimonials = Testimonial::get();
         $posts = Post::where('status', 'published')
                 ->with('category')
