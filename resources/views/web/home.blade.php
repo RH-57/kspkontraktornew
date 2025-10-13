@@ -298,7 +298,7 @@
                             </span>
                         </a>
 
-                        <a class="portfolio-btn" href="{{ route('webprojects.show', $project->slug) }}" data-lightbox="portfolio">
+                        <a class="portfolio-btn" href="{{ route('webprojects.show', $project->slug) }}">
                             <i class="bi bi-eye text-white"></i>
                         </a>
                     </div>
