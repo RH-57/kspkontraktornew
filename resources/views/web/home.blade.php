@@ -277,8 +277,8 @@
 
             <div class="row g-5">
             @foreach($projects as $project)
-                <div class="col-xl-4 col-lg-6 col-md-6 ">
-                    <div class="position-relative">
+                <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item first">
+                    <div class="position-relative portfolio-box">
 
                         {{-- Gunakan cover image jika ada, jika tidak ambil image pertama, kalau tidak ada gunakan default --}}
                         @php
@@ -301,13 +301,13 @@
                             </span>
                         </a>
 
-                        <a class="portfolio-btn" href="{{ route('webprojects.show', $project->slug) }}">
-                            <i class="bi bi-plus text-white"></i>
+                        <a class="portfolio-btn" href="{{ route('webprojects.show', $project->slug) }}" data-lightbox="portfolio">
+                            <i class="bi bi-eye text-white"></i>
                         </a>
                     </div>
                 </div>
             @endforeach
-            </div>
+        </div>
 
         </div>
         <!-- Portfolio End -->
