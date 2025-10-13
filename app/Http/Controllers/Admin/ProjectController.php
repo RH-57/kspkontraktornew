@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ProjectController extends Controller
 {
@@ -37,11 +39,20 @@ class ProjectController extends Controller
 
         $slug = Str::slug($request->name);
         $canonicalUrl = $request->canonical_url ?: url('projects/' . $slug);
+        $manager = new ImageManager(new Driver());
 
-         // Upload cover image
-        $coverPath = null; // NEW
+        // --- Upload & compress cover image ---
+        $coverPath = null;
         if ($request->hasFile('cover_image')) {
-            $coverPath = $request->file('cover_image')->store('projects/covers', 'public');
+            $image = $manager->read($request->file('cover_image')->getRealPath())
+                            ->resize(1280, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                                $constraint->upsize();
+                            });
+
+            $coverFileName = 'projects/covers/' . uniqid() . '.webp';
+            Storage::disk('public')->put($coverFileName, (string) $image->toWebp(80)); // quality 80%
+            $coverPath = $coverFileName;
         }
 
         $project = Project::create([
@@ -57,12 +68,21 @@ class ProjectController extends Controller
             'canonical_url'     => $canonicalUrl,
         ]);
 
+         // --- Upload & compress gallery images ---
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $path = $file->store('projects', 'public');
+                $image = $manager->read($file->getRealPath())
+                                ->resize(1280, null, function ($constraint) {
+                                    $constraint->aspectRatio();
+                                    $constraint->upsize();
+                                });
+
+                $fileName = 'projects/' . uniqid() . '.webp';
+                Storage::disk('public')->put($fileName, (string) $image->toWebp(80));
+
                 ProjectImage::create([
-                    'project_id'    => $project->id,
-                    'image'         => $path
+                    'project_id' => $project->id,
+                    'image'      => $fileName
                 ]);
             }
         }
@@ -113,15 +133,26 @@ class ProjectController extends Controller
 
         $newSlug = Str::slug($request->name);
         $canonicalUrl = $request->canonical_url ?: url('projects/' . $newSlug);
+        $manager = new ImageManager(new Driver());
 
-         // Update cover image
-        if ($request->hasFile('cover_image')) { // NEW
-            // Hapus cover lama kalau ada
-            if ($project->cover_image && Storage::exists('public/' . $project->cover_image)) {
-                Storage::delete('public/' . $project->cover_image);
-            }
-            $coverPath = $request->file('cover_image')->store('projects/covers', 'public');
-            $project->cover_image = $coverPath;
+         // === COVER IMAGE ===
+    if ($request->hasFile('cover_image')) {
+        // Hapus cover lama
+        if ($project->cover_image && Storage::disk('public')->exists($project->cover_image)) {
+            Storage::disk('public')->delete($project->cover_image);
+        }
+
+        // Baca & kompres cover baru
+            $cover = $manager->read($request->file('cover_image')->getRealPath())
+                            ->resize(1280, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                                $constraint->upsize();
+                            });
+
+            $coverFileName = 'projects/covers/' . uniqid() . '.webp';
+            Storage::disk('public')->put($coverFileName, (string) $cover->toWebp(80)); // kualitas 80%
+
+            $project->cover_image = $coverFileName;
         }
 
         // Update data project
@@ -138,13 +169,21 @@ class ProjectController extends Controller
             'canonical_url'     => $canonicalUrl,
         ]);
 
-        // Upload image baru (jika ada)
+         // === GALERI BARU ===
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $path = $file->store('projects', 'public');
+                $image = $manager->read($file->getRealPath())
+                                ->resize(1280, null, function ($constraint) {
+                                    $constraint->aspectRatio();
+                                    $constraint->upsize();
+                                });
+
+                $fileName = 'projects/' . uniqid() . '.webp';
+                Storage::disk('public')->put($fileName, (string) $image->toWebp(80));
+
                 ProjectImage::create([
-                    'project_id'    => $project->id,
-                    'image'         => $path
+                    'project_id' => $project->id,
+                    'image'      => $fileName,
                 ]);
             }
         }
