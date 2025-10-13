@@ -79,19 +79,6 @@
                 </div>
 
                 <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Slug</label>
-                  <div class="col-sm-10">
-                    <input type="text" name="slug" value="{{ old('slug') }}" class="form-control" placeholder="auto generate if empty">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Icon</label>
-                  <div class="col-sm-4">
-                    <input type="text" name="icon" value="{{ old('icon') }}" class="form-control" placeholder="Bootstrap icon class e.g. bi bi-gear">
-                  </div>
-
-                   <!-- Image -->
                     <label class="col-sm-2 col-form-label">Image</label>
                     <div class="col-sm-4">
                         <input type="file" name="image" class="form-control" required>
@@ -149,13 +136,6 @@
                   <label class="col-sm-2 col-form-label">Meta Image</label>
                   <div class="col-sm-10">
                     <input type="file" name="meta_image" class="form-control">
-                  </div>
-                </div>
-
-                <div class="row mb-3">
-                  <label class="col-sm-2 col-form-label">Canonical URL</label>
-                  <div class="col-sm-10">
-                    <input type="url" name="canonical_url" value="{{ old('canonical_url') }}" class="form-control">
                   </div>
                 </div>
 

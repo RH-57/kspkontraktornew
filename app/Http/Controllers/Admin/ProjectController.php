@@ -37,7 +37,15 @@ class ProjectController extends Controller
             'canonical_url'     => 'nullable|url|max:255',
         ]);
 
-        $slug = Str::slug($request->name);
+        $baseSlug = Str::slug($request->name);
+        $slug = $baseSlug;
+
+        // === CEK DUPLIKAT SLUG ===
+        $counter = 1;
+        while (Project::where('slug', $slug)->exists()) {
+            $slug = $baseSlug . '-' . str_pad($counter, 2, '0', STR_PAD_LEFT);
+            $counter++;
+        }
         $canonicalUrl = $request->canonical_url ?: url('projects/' . $slug);
         $manager = new ImageManager(new Driver());
 
@@ -131,16 +139,24 @@ class ProjectController extends Controller
             'canonical_url'     => 'nullable|url|max:255',
         ]);
 
-        $newSlug = Str::slug($request->name);
+        $baseSlug = Str::slug($request->name);
+        $newSlug = $baseSlug;
+
+        // === CEK SLUG UNIK SAAT UPDATE ===
+        $counter = 1;
+        while (Project::where('slug', $newSlug)->where('id', '!=', $project->id)->exists()) {
+            $newSlug = $baseSlug . '-' . str_pad($counter, 2, '0', STR_PAD_LEFT);
+            $counter++;
+        }
         $canonicalUrl = $request->canonical_url ?: url('projects/' . $newSlug);
         $manager = new ImageManager(new Driver());
 
          // === COVER IMAGE ===
-    if ($request->hasFile('cover_image')) {
-        // Hapus cover lama
-        if ($project->cover_image && Storage::disk('public')->exists($project->cover_image)) {
-            Storage::disk('public')->delete($project->cover_image);
-        }
+        if ($request->hasFile('cover_image')) {
+            // Hapus cover lama
+            if ($project->cover_image && Storage::disk('public')->exists($project->cover_image)) {
+                Storage::disk('public')->delete($project->cover_image);
+            }
 
         // Baca & kompres cover baru
             $cover = $manager->read($request->file('cover_image')->getRealPath())
