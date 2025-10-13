@@ -15,6 +15,7 @@ class Project extends Model
         'location',
         'description',
         'year',
+        'cover_image',
         'meta_title',
         'meta_description',
         'meta_keyword',

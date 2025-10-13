@@ -103,6 +103,16 @@
                 </div>
 
                 <div class="row mb-3">
+                    <label for="cover_image" class="col-sm-2 col-form-label">Cover Image</label>
+                    <div class="col-sm-10">
+                        <input type="file" name="cover_image" id="cover_image" class="form-control" accept="image/*">
+                        @error('cover_image') <small class="text-danger">{{ $message }}</small> @enderror
+
+                        <div class="mt-3" id="cover-preview"></div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
                     <label for="images" class="col-sm-2 col-form-label">Images</label>
                     <div class="col-sm-10">
                         <input type="file" name="images[]" id="images" class="form-control" multiple accept="image/*">

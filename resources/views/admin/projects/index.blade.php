@@ -84,6 +84,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Location</th>
                                         <th scope="col">Year</th>
+                                        <th scope="col">Cover</th>
                                         <th scope="col">Action</th>
                                     </tr>
                                 </thead>
@@ -94,6 +95,15 @@
                                         <td>{{$project->name}}</td>
                                         <td>{{$project->location}}</td>
                                         <td>{{$project->year}}</td>
+                                        <td>
+                                            @if($project->cover_image)
+                                                <img src="{{ asset('storage/' . $project->cover_image) }}"
+                                                    alt="{{ $project->name }}"
+                                                    style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px;">
+                                            @else
+                                                <span class="text-muted">No Cover</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="{{ route('projects.show', $project->slug) }}" class="btn btn-sm btn-info">
                                                 <i class="bi bi-eye"></i>

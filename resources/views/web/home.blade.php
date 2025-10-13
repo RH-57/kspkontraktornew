@@ -276,23 +276,39 @@
             </div>
 
             <div class="row g-5">
-                @foreach($projects as $project)
+            @foreach($projects as $project)
                 <div class="col-xl-4 col-lg-6 col-md-6 portfolio-item first">
                     <div class="position-relative portfolio-box">
-                        <img class="img-fluid w-100" src="{{ $project->images->first() ? asset('storage/' . $project->images->first()->image) : asset('default.jpg') }}"
-                        alt="{{ $project->name }}"
-                        style="width:100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; display:block;" />
+
+                        {{-- Gunakan cover image jika ada, jika tidak ambil image pertama, kalau tidak ada gunakan default --}}
+                        @php
+                            $cover = $project->cover_image
+                                ? asset('storage/' . $project->cover_image)
+                                : ($project->images->first()
+                                    ? asset('storage/' . $project->images->first()->image)
+                                    : asset('default.jpg'));
+                        @endphp
+
+                        <img class="img-fluid w-100"
+                            src="{{ $cover }}"
+                            alt="{{ $project->name }}"
+                            style="width:100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; display:block;" />
+
                         <a class="portfolio-title shadow-sm" href="{{ route('webprojects.show', $project->slug) }}">
-                            <p class="h5 text-uppercase">{{$project->name}}</p>
-                            <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{$project->location}}</span>
+                            <p class="h4 text-uppercase">{{ $project->name }}</p>
+                            <span class="text-body">
+                                <i class="fa fa-map-marker-alt text-primary me-2"></i>{{ $project->location }}
+                            </span>
                         </a>
-                        <a class="portfolio-btn" href="{{ $project->images->first() ? asset('storage/' . $project->images->first()->image) : asset('default.jpg') }}" data-lightbox="portfolio">
+
+                        <a class="portfolio-btn" href="{{ $cover }}" data-lightbox="portfolio">
                             <i class="bi bi-plus text-white"></i>
                         </a>
                     </div>
                 </div>
-                @endforeach
-            </div>
+            @endforeach
+        </div>
+
         </div>
         <!-- Portfolio End -->
 

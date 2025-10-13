@@ -82,6 +82,23 @@
                   <textarea name="description" id="editor" class="form-control" rows="4" required>{{ old('description', $project->description) }}</textarea>
                 </div>
 
+                <div class="mb-3">
+                    <label for="cover_image" class="form-label">Cover Image</label>
+                    <input type="file" name="cover_image" id="cover_image" class="form-control" accept="image/*">
+                    <small class="text-muted">Upload a new cover image (optional).</small>
+
+                    {{-- tampilkan cover lama --}}
+                    @if ($project->cover_image)
+                        <div class="mt-3">
+                            <p class="mb-1">Current Cover:</p>
+                            <img src="{{ asset('storage/' . $project->cover_image) }}" alt="Current Cover" style="max-width:200px; height:150px; object-fit:cover; border-radius:5px; box-shadow:0 2px 5px rgba(0,0,0,0.2);">
+                        </div>
+                    @endif
+
+                    {{-- preview cover baru --}}
+                    <div id="cover-preview" class="mt-3"></div>
+                </div>
+
                 {{-- Upload gambar baru --}}
                 <div class="mb-3">
                   <label for="images" class="form-label">Add New Images</label>

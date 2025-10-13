@@ -163,7 +163,7 @@
                                     <a href="{{ route('webprojects.show', $other->slug) }}" class="text-decoration-none">
                                         <div class="card border-0 shadow-sm h-100">
                                             <img src="{{ $other->images->first()
-                                                        ? asset('storage/public/' . $other->images->first()->image)
+                                                        ? asset('storage/' . $other->images->first()->image)
                                                         : asset('assets/web/img/default.jpg') }}"
                                                 class="card-img-top rounded-top"
                                                 alt="{{ $other->name }}"

@@ -144,7 +144,30 @@
 
                     <!-- Media Tab -->
                     <div class="tab-pane fade" id="project-media">
-                        <h5 class="card-title">Media Files</h5>
+                        <h5 class="card-title mb-3">Media Files</h5>
+
+                        {{-- Cover Image --}}
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-primary">Cover Image</h6>
+                            @if($project->cover_image)
+                                <div class="card shadow-sm mb-3" style="max-width: 300px;">
+                                    <img src="{{ asset('storage/' . $project->cover_image) }}"
+                                        alt="Cover of {{ $project->name }}"
+                                        class="card-img-top rounded"
+                                        style="height: 200px; object-fit: cover;">
+                                    <div class="card-body py-2 text-center">
+                                        <small class="text-muted">Cover Image</small>
+                                    </div>
+                                </div>
+                            @else
+                                <p class="text-muted">No cover image uploaded for this project.</p>
+                            @endif
+                        </div>
+
+                        <hr>
+
+                        {{-- Additional Images --}}
+                        <h6 class="fw-bold text-primary mt-3">Gallery</h6>
                         <div class="row">
                             @forelse($project->images as $img)
                                 <div class="col-md-3 col-sm-6 mb-3">
@@ -157,11 +180,13 @@
                                 </div>
                             @empty
                                 <div class="col-12">
-                                    <p class="text-muted">No images uploaded for this project.</p>
+                                    <p class="text-muted">No gallery images uploaded for this project.</p>
                                 </div>
                             @endforelse
-                            </div>
-                    </div><!-- End Media Tab -->
+                        </div>
+                    </div>
+                    <!-- End Media Tab -->
+
 
                 </div><!-- End Tab Content -->
 
