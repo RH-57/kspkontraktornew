@@ -69,7 +69,7 @@
             <!-- Gambar Utama -->
             <div class="col-lg-7">
                  @if($project->images && $project->images->count() > 0)
-                    <img src="{{ asset('storage/' . $project->images->first()->image) }}"
+                    <img src="{{ asset('storage/' . $project->cover_image) }}"
                         class="img-fluid rounded shadow-sm mb-4"
                         alt="{{ $project->name }}"
                         style="width: 100%; max-height: 400px; object-fit: cover;">
@@ -163,7 +163,7 @@
                                     <a href="{{ route('webprojects.show', $other->slug) }}" class="text-decoration-none">
                                         <div class="card border-0 shadow-sm h-100">
                                             <img src="{{ $other->images->first()
-                                                        ? asset('storage/' . $other->images->first()->image)
+                                                        ? asset('storage/' . $other->cover_image)
                                                         : asset('assets/web/img/default.jpg') }}"
                                                 class="card-img-top rounded-top"
                                                 alt="{{ $other->name }}"
