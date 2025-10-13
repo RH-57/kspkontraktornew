@@ -141,11 +141,26 @@
                         <h4 class="text-uppercase mb-3">Galeri Proyek</h4>
                         <div class="row g-2">
                             @foreach($project->images as $img)
-                                <div class="col-6">
+                                <div class="col-6 col-md-4 col-lg-3">
                                     <a href="{{ asset('storage/' . $img->image) }}" data-lightbox="project-gallery">
-                                        <img src="{{ asset('storage/' . $img->image) }}"
-                                            class="img-fluid rounded shadow-sm"
-                                            alt="Gallery {{ $project->name }}">
+                                        <div style="
+                                            width: 100%;
+                                            aspect-ratio: 1 / 1;
+                                            overflow: hidden;
+                                            border-radius: 8px;
+                                            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+                                        ">
+                                            <img src="{{ asset('storage/' . $img->image) }}"
+                                                alt="Gallery {{ $project->name }}"
+                                                style="
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    object-fit: cover;
+                                                    transition: transform 0.3s ease;
+                                                "
+                                                onmouseover="this.style.transform='scale(1.05)'"
+                                                onmouseout="this.style.transform='scale(1)'">
+                                        </div>
                                     </a>
                                 </div>
                             @endforeach
