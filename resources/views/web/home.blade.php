@@ -281,9 +281,9 @@
                     <div class="position-relative portfolio-box">
                         <img class="img-fluid w-100" src="{{ $project->images->first() ? asset('storage/' . $project->images->first()->image) : asset('default.jpg') }}"
                         alt="{{ $project->name }}"
-                        style="height: 250px; object-fit: cover; border-radius: 5px;" />
+                        style="width:100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; display:block;" />
                         <a class="portfolio-title shadow-sm" href="{{ route('webprojects.show', $project->slug) }}">
-                            <p class="h4 text-uppercase">{{$project->name}}</p>
+                            <p class="h5 text-uppercase">{{$project->name}}</p>
                             <span class="text-body"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{$project->location}}</span>
                         </a>
                         <a class="portfolio-btn" href="{{ $project->images->first() ? asset('storage/' . $project->images->first()->image) : asset('default.jpg') }}" data-lightbox="portfolio">
