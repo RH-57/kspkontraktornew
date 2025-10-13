@@ -64,10 +64,10 @@
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-12">
+        <div class="col-12">
           <div class="row">
 
-            <div class="col-xxl-8 col-xl-12">
+            <div class="col-12">
                 <div class="card info-card customers-card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -76,42 +76,44 @@
                             </h5>
                             <a class="btn btn-sm btn-primary" href="{{route('testimonials.create')}}">Add</a>
                         </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Client</th>
-                                    <th scope="col">Project</th>
-                                    <th scope="col">Description</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($testimonials as $index =>$testimonial)
-                                <tr>
-                                    <td>{{$index + 1}}</td>
-                                    <td>{{$testimonial->client_name}}</td>
-                                    <td>{{$testimonial->project_name}}</td>
-                                    <td>{{$testimonial->description}}</td>
-                                    <td><img src="{{asset('storage/' . $testimonial->image)}}" alt="testimonial image" width="80" class="img-thumbnail"></td>
-                                    <td>
-                                        <a href="{{ route('testimonials.edit', $testimonial->id) }}" class="btn btn-sm btn-warning">
-                                            <i class="bi bi-pen"></i>
-                                        </a>
-                                        <form action="{{ route('testimonials.destroy', $testimonial->id)}}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        {{$testimonials->links()}}
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Client</th>
+                                        <th scope="col">Project</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($testimonials as $index =>$testimonial)
+                                    <tr>
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{$testimonial->client_name}}</td>
+                                        <td>{{$testimonial->project_name}}</td>
+                                        <td>{{$testimonial->description}}</td>
+                                        <td><img src="{{asset('storage/' . $testimonial->image)}}" alt="testimonial image" width="80" class="img-thumbnail"></td>
+                                        <td>
+                                            <a href="{{ route('testimonials.edit', $testimonial->id) }}" class="btn btn-sm btn-warning">
+                                                <i class="bi bi-pen"></i>
+                                            </a>
+                                            <form action="{{ route('testimonials.destroy', $testimonial->id)}}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                            {{$testimonials->links()}}
+                        </div>
                     </div>
                 </div>
             </div>

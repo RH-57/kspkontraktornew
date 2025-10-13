@@ -55,7 +55,7 @@
     <section class="section dashboard">
       <div class="row">
 
-        <div class="col-lg-8">
+        <div class="col">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Update <span>| Google Ads</span></h5>

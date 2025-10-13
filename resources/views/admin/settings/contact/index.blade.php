@@ -64,7 +64,7 @@
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-8">
+        <div class="col">
           <div class="row">
 
             <!-- Customers Card -->
@@ -126,7 +126,7 @@
                             </h5>
                             <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#socialmedia">Add</button>
                         </div>
-                        <table class="table">
+                        <table class="table table-responsive">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>

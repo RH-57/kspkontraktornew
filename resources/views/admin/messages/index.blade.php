@@ -64,10 +64,10 @@
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-8">
+        <div class="col-12">
           <div class="row">
 
-            <div class="col-xxl-8 col-xl-12">
+            <div class="col-12">
                 <div class="card info-card customers-card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -75,37 +75,39 @@
                                 Manage <span>| Messages</span>
                             </h5>
                         </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($messages as $message)
-                                <tr>
-                                    <td>{{$message->name}}</td>
-                                    <td>{{$message->email}}</td>
-                                    <td>{{$message->subject}}</td>
-                                    <td>
-                                        <a href="{{ route('messages.show', $message->id) }}" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <form action="{{ route('messages.destroy', $message->id)}}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead  class="table-light">
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Subject</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($messages as $message)
+                                    <tr>
+                                        <td>{{$message->name}}</td>
+                                        <td>{{$message->email}}</td>
+                                        <td>{{$message->subject}}</td>
+                                        <td>
+                                            <a href="{{ route('messages.show', $message->id) }}" class="btn btn-sm btn-info">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <form action="{{ route('messages.destroy', $message->id)}}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

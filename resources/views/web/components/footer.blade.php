@@ -39,7 +39,7 @@
                 <p class="mb-0">&copy; <a class="text-primary" href="#">kspkontraktor.com</a>. All Rights Reserved.</p>
             </div>
             <div class="py-4 px-5 bg-primary footer-shape position-relative text-center text-md-end">
-                <p class="mb-0">Designed by <a class="text-dark" href="https://htmlcodex.com">HTML Codex</a></p>
-                <p class="mb-0">Distributed by <a class="text-dark" href="https://themewagon.com">ThemeWagon</a></p>
+                <p class="mb-0" hidden>Designed by <a class="text-dark" href="https://htmlcodex.com" hidden>HTML Codex</a></p>
+                <p class="mb-0" hidden>Distributed by <a class="text-dark" href="https://themewagon.com" hidden>ThemeWagon</a></p>
             </div>
         </div>

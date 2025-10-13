@@ -64,10 +64,10 @@
       <div class="row">
 
         <!-- Left side columns -->
-        <div class="col-lg-8">
+        <div class="col-12">
           <div class="row">
 
-            <div class="col-xxl-8 col-xl-12">
+            <div class="col-12">
                 <div class="card info-card customers-card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -76,39 +76,41 @@
                             </h5>
                             <a class="btn btn-sm btn-primary" href="{{route('projects.create')}}">Add</a>
                         </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Location</th>
-                                    <th scope="col">Year</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($projects as $index =>$project)
-                                <tr>
-                                    <td>{{$index + 1}}</td>
-                                    <td>{{$project->name}}</td>
-                                    <td>{{$project->location}}</td>
-                                    <td>{{$project->year}}</td>
-                                    <td>
-                                        <a href="{{ route('projects.show', $project->slug) }}" class="btn btn-sm btn-info">
-                                            <i class="bi bi-eye"></i>
-                                        </a>
-                                        <form action="{{ route('projects.destroy', $project->id)}}" method="POST" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?')">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Location</th>
+                                        <th scope="col">Year</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($projects as $index =>$project)
+                                    <tr>
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{$project->name}}</td>
+                                        <td>{{$project->location}}</td>
+                                        <td>{{$project->year}}</td>
+                                        <td>
+                                            <a href="{{ route('projects.show', $project->slug) }}" class="btn btn-sm btn-info">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <form action="{{ route('projects.destroy', $project->id)}}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this service?')">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
