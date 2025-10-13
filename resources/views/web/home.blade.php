@@ -60,9 +60,6 @@
     <div id="page-wrapper" style="height: 100vh; overflow: auto;">
         @include('web.components.header')
 
-        <!-- Navbar End -->
-
-
         <!-- Carousel Start -->
         <div class="container-fluid p-0">
             <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">

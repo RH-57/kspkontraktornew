@@ -145,6 +145,35 @@
     }
 }
 
+/* Kurangi skala carousel di monitor besar (Full HD ke atas) */
+@media (min-width: 1600px) {
+    /* Kurangi tinggi gambar agar tidak terlalu memenuhi layar */
+    #header-carousel .carousel-item img {
+        height: 80vh;
+        object-fit: cover;
+    }
+
+    /* Perkecil area konten tengah */
+    #header-carousel .carousel-caption .p-3 {
+        max-width: 700px; /* semula 900px */
+        transform: scale(0.9);
+    }
+
+    /* Sesuaikan ukuran teks dan tombol agar lebih proporsional */
+    #header-carousel h1 {
+        font-size: 2.2rem;
+    }
+
+    #header-carousel i {
+        font-size: 3rem; /* ikon juga dikecilkan */
+    }
+
+    #header-carousel .btn {
+        padding: 0.6rem 1.8rem;
+        font-size: 0.95rem;
+    }
+}
+
 .page-header {
     height: 300px;
     display: flex;
