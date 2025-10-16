@@ -5,7 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\WebpEncoder;
 
 
 class ServiceController extends Controller
@@ -26,12 +30,12 @@ class ServiceController extends Controller
             'short_description' => 'required|string',
             'description'       => 'required|string',
             'icon'              => 'nullable|string|max:50',
-            'image'             => 'required|image|mimes:jpeg,jpg,png,webp|max:2048',
+            'image'             => 'required|image|mimes:jpeg,jpg,png,webp|max:4096',
             'status'            => 'required|in:0,1',
             'meta_title'        => 'nullable|string|max:255',
             'meta_description'  => 'nullable|string',
             'meta_keyword'      => 'nullable|string|max:255',
-            'meta_image'        => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
+            'meta_image'        => 'nullable|image|mimes:jpeg,jpg,png,webp|max:4096',
             'canonical_url'     => 'nullable|url|max:255',
         ]);
 
@@ -39,12 +43,28 @@ class ServiceController extends Controller
 
         $imagePath = null;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('services/images', 'public');
+            $manager = new ImageManager(new Driver());
+            $file = $request->file('image');
+            $image = $manager->read($file->getPathname());
+            $encoded = $image->encode(new WebpEncoder(quality:75));
+            $filename = uniqid() . '.webp';
+            $path = 'services/images/' . $filename;
+
+            Storage::disk('public')->put($path, (string) $encoded);
+            $imagePath = $path;
         }
 
         $metaImagePath = null;
         if ($request->hasFile('meta_image')) {
-            $metaImagePath = $request->file('meta_image')->store('services/meta', 'public');
+            $manager = new ImageManager(new Driver());
+            $file = $request->file('meta_image');
+            $image = $manager->read($file->getPathname());
+            $encoded = $image->encode(new WebpEncoder(quality:75));
+            $filename = uniqid() . '.webp';
+            $path = 'services/meta/' . $filename;
+
+            Storage::disk('public')->put($path, (string) $encoded);
+            $metaImagePath = $path;
         }
 
         $canonicalUrl = $request->canonical_url ? $request->canonical_url : url('services', $slug);
@@ -86,12 +106,12 @@ class ServiceController extends Controller
             'short_description' => 'required|string',
             'description'       => 'required|string',
             'icon'              => 'nullable|string|max:50',
-            'image'             => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
+            'image'             => 'nullable|image|mimes:jpeg,jpg,png,webp|max:4096',
             'status'            => 'required|in:0,1',
             'meta_title'        => 'nullable|string|max:255',
             'meta_description'  => 'nullable|string',
             'meta_keyword'      => 'nullable|string|max:255',
-            'meta_image'        => 'nullable|image|mimes:jpeg,jpg,png,webp|max:2048',
+            'meta_image'        => 'nullable|image|mimes:jpeg,jpg,png,webp|max:4096',
             'canonical_url'     => 'nullable|url|max:255',
         ]);
 
@@ -100,16 +120,44 @@ class ServiceController extends Controller
             $slugNew .= '-' . time();
         }
 
-        // Update image jika ada upload baru
+        $manager = new ImageManager(new Driver());
         $imagePath = $service->image;
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('services/images', 'public');
+            if ($service->image && Storage::disk('public')->exists($service->image)) {
+                Storage::disk('public')->delete($service->image);
+            }
+
+            $file = $request->file('image');
+            $image = $manager->read($file->getPathname());
+            if ($image->width() > 1200) {
+                $image->scaleDown(width: 1200);
+            }
+
+            $encoded = $image->encode(new WebpEncoder(quality:70));
+            $filename = uniqid() . '.webp';
+            $path = 'services/images/' . $filename;
+            Storage::disk('public')->put($path, (string) $encoded);
+            $imagePath = $path;
         }
 
-        // Update meta image jika ada upload baru
+        // === Update & Compress Meta Image ===
         $metaImagePath = $service->meta_image;
         if ($request->hasFile('meta_image')) {
-            $metaImagePath = $request->file('meta_image')->store('services/meta', 'public');
+            if ($service->meta_image && Storage::disk('public')->exists($service->meta_image)) {
+                Storage::disk('public')->delete($service->meta_image);
+            }
+
+            $file = $request->file('meta_image');
+            $image = $manager->read($file->getPathname());
+            if ($image->width() > 1200) {
+                $image->scaleDown(width: 1200);
+            }
+
+            $encoded = $image->encode(new WebpEncoder(quality:70));
+            $filename = uniqid() . '.webp';
+            $path = 'services/meta/' . $filename;
+            Storage::disk('public')->put($path, (string) $encoded);
+            $metaImagePath = $path;
         }
 
         $canonicalUrl = $request->canonical_url ? $request->canonical_url : url('services', $slug);

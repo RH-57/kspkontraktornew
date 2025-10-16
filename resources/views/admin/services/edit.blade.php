@@ -124,7 +124,7 @@
                 <div class="mb-3">
                   <label for="meta_image" class="form-label">Meta Image</label><br>
                   @if($service->meta_image)
-                    <img src="{{ asset('storage/public/'.$service->meta_image) }}" alt="Meta Image" class="img-thumbnail mb-2" width="200">
+                    <img src="{{ asset('storage/'.$service->meta_image) }}" alt="Meta Image" class="img-thumbnail mb-2" width="200">
                   @endif
                   <input type="file" name="meta_image" class="form-control">
                   <small class="text-muted">Kosongkan jika tidak ingin mengganti</small>

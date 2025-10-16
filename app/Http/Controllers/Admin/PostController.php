@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\WebpEncoder;
 
 class PostController
 {
@@ -34,17 +37,21 @@ class PostController
     {
         if ($request->hasFile('upload')) {
             $file = $request->file('upload');
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read($file->getPathname());
 
-            // buat nama unik biar nggak tabrakan
-            $filename = time() . '_' . preg_replace('/\s+/', '_', $file->getClientOriginalName());
+            if ($image->width() > 1600) {
+                $image->scaleDown(width: 1600);
+            }
 
-            // simpan ke storage/app/public/posts/images
-            $file->storeAs('posts/images', $filename, 'public');
+            $encoded = $image->encode(new WebpEncoder(quality: 75));
 
-            // ambil URL publik
-            $url = asset('storage/posts/images/' . $filename);
+            $filename = uniqid('post_') . '.webp';
+            $path = 'posts/images/' . $filename;
 
-            // CKEditor 5 EXPECTS "uploaded" + "url"
+            Storage::disk('public')->put($path, (string) $encoded);
+            $url = asset('storage/' . $path);
+
             return response()->json([
                 'uploaded' => true,
                 'url' => $url
@@ -65,7 +72,7 @@ class PostController
         $request->validate([
             'title'            => 'required|string|max:255',
             'post_category_id' => 'required|exists:post_categories,id',
-            'featured_image'   => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'featured_image'   => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
             'content'          => 'required|string',
             'status'           => 'required|in:draft,published',
             'meta_title'       => 'nullable|string|max:255',
@@ -73,13 +80,24 @@ class PostController
             'meta_keyword'     => 'nullable|string|max:255',
         ]);
 
-        $slug = Str::slug($request->title) . '-' . time();
+        $slug = Str::slug($request->title);
+        if (Post::where('slug', $slug)->exists()) {
+            $slug .= '-' . substr(uniqid(), -5);
+        }
 
-        $featuredImagePath = null;
+        $manager = new ImageManager(new Driver());
+        $featuredPath = null;
         if ($request->hasFile('featured_image')) {
-            // simpan ke storage/app/public/posts/featured
-            $path = $request->file('featured_image')->store('posts/featured', 'public');
-            $featuredImagePath = $path;
+            $file = $request->file('featured_image');
+            $image = $manager->read($file->getPathname());
+
+            $encoded = $image->encode(new WebpEncoder(quality: 75));
+
+            $filename = uniqid('featured_') . '.webp';
+            $path = 'posts/featured/' . $filename;
+
+            Storage::disk('public')->put($path, (string) $encoded);
+            $featuredPath = $path;
         }
 
         $post = Post::create([
@@ -88,7 +106,7 @@ class PostController
             'slug'             => $slug,
             'post_category_id' => $request->post_category_id,
             'content'          => $request->content,
-            'featured_image'   => $featuredImagePath,
+            'featured_image'   => $featuredPath,
             'meta_title'       => $request->meta_title,
             'meta_description' => $request->meta_description,
             'meta_keyword'     => $request->meta_keyword,
@@ -120,19 +138,26 @@ class PostController
             'status'            => 'required|in:draft,published',
         ]);
 
+        // 🔹 Slug logika baru
         $slugNew = $request->slug ? Str::slug($request->slug) : Str::slug($request->title);
         if (Post::where('slug', $slugNew)->where('id', '!=', $post->id)->exists()) {
-            $slugNew .= '-' . time();
+            $slugNew .= '-' . substr(uniqid(), -5);
         }
 
-        // Ganti featured image jika ada file baru
+        $manager = new ImageManager(new Driver());
+
         if ($request->hasFile('featured_image')) {
-            // hapus yang lama jika ada
             if ($post->featured_image && Storage::disk('public')->exists($post->featured_image)) {
                 Storage::disk('public')->delete($post->featured_image);
             }
 
-            $path = $request->file('featured_image')->store('posts/featured', 'public');
+            $file = $request->file('featured_image');
+            $image = $manager->read($file->getPathname());
+
+            $encoded = $image->encode(new WebpEncoder(quality: 75));
+            $filename = uniqid('featured_') . '.webp';
+            $path = 'posts/featured/' . $filename;
+            Storage::disk('public')->put($path, (string) $encoded);
             $post->featured_image = $path;
         }
 

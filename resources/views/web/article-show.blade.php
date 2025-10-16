@@ -146,8 +146,6 @@
 
             <!-- Sidebar -->
             <div class="col-lg-4">
-
-                <!-- Artikel Terkait -->
                 <!-- Artikel Terkait -->
                 @if($relatedPosts->count() > 0)
                 <div class="bg-white shadow-sm rounded p-4 mb-4">
@@ -159,7 +157,7 @@
 
                             <!-- Thumbnail -->
                             <img src="{{ $related->featured_image
-                                        ? asset('/' . $related->featured_image)
+                                        ? asset('storage/' . $related->featured_image)
                                         : asset('assets/web/img/default.jpg') }}"
                                 alt="{{ $related->title }}"
                                 class="rounded me-3"

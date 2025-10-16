@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Encoders\WebpEncoder;
+use Intervention\Image\ImageManager;
 
 class ProjectController extends Controller
 {
@@ -35,23 +38,38 @@ class ProjectController extends Controller
             'canonical_url'     => 'nullable|url|max:255',
         ]);
 
+        $manager = new ImageManager(new Driver());
+
+        // === Slug Unik ===
         $baseSlug = Str::slug($request->name);
         $slug = $baseSlug;
-
-        // === CEK DUPLIKAT SLUG ===
         $counter = 1;
         while (Project::where('slug', $slug)->exists()) {
             $slug = $baseSlug . '-' . str_pad($counter, 2, '0', STR_PAD_LEFT);
             $counter++;
         }
+
         $canonicalUrl = $request->canonical_url ?: url('projects/' . $slug);
 
-         // Upload cover image
-        $coverPath = null; // NEW
+        // === Upload & Compress Cover Image ===
+        $coverPath = null;
         if ($request->hasFile('cover_image')) {
-            $coverPath = $request->file('cover_image')->store('projects/covers', 'public');
+            $file = $request->file('cover_image');
+            $image = $manager->read($file->getPathname());
+
+            // Resize agar tidak terlalu besar
+            if ($image->width() > 1600) {
+                $image->scaleDown(width: 1600);
+            }
+
+            $encoded = $image->encode(new WebpEncoder(quality:70));
+            $filename = uniqid() . '.webp';
+            $path = 'projects/cover/' . $filename;
+            Storage::disk('public')->put($path, (string) $encoded);
+            $coverPath = $path;
         }
 
+        // === Simpan Project ===
         $project = Project::create([
             'name'              => $request->name,
             'slug'              => $slug,
@@ -65,9 +83,23 @@ class ProjectController extends Controller
             'canonical_url'     => $canonicalUrl,
         ]);
 
+        // === Upload & Compress Semua Gambar ===
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $path = $file->store('projects', 'public');
+                $image = $manager->read($file->getPathname());
+
+                // Resize jika terlalu besar (contoh max 1200px)
+                if ($image->width() > 1200) {
+                    $image->scaleDown(width: 1200);
+                }
+
+                // Encode ke WebP
+                $encoded = $image->encode(new WebpEncoder(quality:70));
+
+                $filename = uniqid() . '.webp';
+                $path = 'projects/images/' . $filename;
+                Storage::disk('public')->put($path, (string) $encoded);
+
                 ProjectImage::create([
                     'project_id'    => $project->id,
                     'image'         => $path
@@ -83,23 +115,19 @@ class ProjectController extends Controller
         return view('admin.projects.show', compact('project'));
     }
 
-    public function edit($slug){
+    public function edit($slug) {
         $project = Project::where('slug', $slug)->with('images')->firstOrFail();
         return view('admin.projects.edit', compact('project'));
     }
 
-    public function deleteImage($id)
-    {
+    public function deleteImage($id) {
         $image = ProjectImage::findOrFail($id);
 
-        // Hapus file dari storage
-        if ($image->image && Storage::exists('public/' . $image->image)) {
-            Storage::delete('public/' . $image->image);
+        if ($image->image && Storage::disk('public')->exists($image->image)) {
+            Storage::disk('public')->delete($image->image);
         }
 
-        // Hapus record di database
         $image->delete();
-
         return redirect()->back()->with('success', 'Image deleted successfully!');
     }
 
@@ -119,10 +147,11 @@ class ProjectController extends Controller
             'canonical_url'     => 'nullable|url|max:255',
         ]);
 
+        $manager = new ImageManager(new Driver());
+
+        // === Slug Unik Saat Update ===
         $baseSlug = Str::slug($request->name);
         $newSlug = $baseSlug;
-
-        // === CEK SLUG UNIK SAAT UPDATE ===
         $counter = 1;
         while (Project::where('slug', $newSlug)->where('id', '!=', $project->id)->exists()) {
             $newSlug = $baseSlug . '-' . str_pad($counter, 2, '0', STR_PAD_LEFT);
@@ -130,17 +159,25 @@ class ProjectController extends Controller
         }
         $canonicalUrl = $request->canonical_url ?: url('projects/' . $newSlug);
 
-         // Update cover image
-        if ($request->hasFile('cover_image')) { // NEW
-            // Hapus cover lama kalau ada
-            if ($project->cover_image && Storage::exists('public/' . $project->cover_image)) {
-                Storage::delete('public/' . $project->cover_image);
+        // === Update Cover Image ===
+        if ($request->hasFile('cover_image')) {
+            if ($project->cover_image && Storage::disk('public')->exists($project->cover_image)) {
+                Storage::disk('public')->delete($project->cover_image);
             }
-            $coverPath = $request->file('cover_image')->store('projects/covers', 'public');
-            $project->cover_image = $coverPath;
+
+            $file = $request->file('cover_image');
+            $image = $manager->read($file->getPathname());
+            if ($image->width() > 1600) {
+                $image->scaleDown(width: 1600);
+            }
+            $encoded = $image->encode(new WebpEncoder(quality:70));
+            $filename = uniqid() . '.webp';
+            $path = 'projects/cover/' . $filename;
+            Storage::disk('public')->put($path, (string) $encoded);
+            $project->cover_image = $path;
         }
 
-        // Update data project
+        // === Update Data Project ===
         $project->update([
             'name'              => $request->name,
             'slug'              => $newSlug,
@@ -154,30 +191,37 @@ class ProjectController extends Controller
             'canonical_url'     => $canonicalUrl,
         ]);
 
-        // Upload image baru (jika ada)
+        // === Upload Gambar Baru (Compress) ===
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $path = $file->store('projects', 'public');
+                $image = $manager->read($file->getPathname());
+                if ($image->width() > 1200) {
+                    $image->scaleDown(width: 1200);
+                }
+
+                $encoded = $image->encode(new WebpEncoder(quality:70));
+                $filename = uniqid() . '.webp';
+                $path = 'projects/images/' . $filename;
+                Storage::disk('public')->put($path, (string) $encoded);
+
                 ProjectImage::create([
-                    'project_id'    => $project->id,
-                    'image'         => $path
+                    'project_id' => $project->id,
+                    'image'      => $path,
                 ]);
             }
         }
 
         return redirect()->route('projects.show', $project->slug)
-                        ->with('success', 'Project updated successfully!');
+            ->with('success', 'Project updated successfully!');
     }
 
     public function destroy($id) {
         $project = Project::findOrFail($id);
-        // Hapus cover image juga // NEW
-        if ($project->cover_image && Storage::exists('public/' . $project->cover_image)) {
-            Storage::delete('public/' . $project->cover_image);
+        if ($project->cover_image && Storage::disk('public')->exists($project->cover_image)) {
+            Storage::disk('public')->delete($project->cover_image);
         }
 
         $project->delete();
-
         return redirect()->route('projects.index')->with('success', 'Project Deleted Successfully');
     }
 }
