@@ -65,7 +65,7 @@
             <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="w-100" src="{{asset('assets/web/img/carousel-1.jpg')}}" alt="Image">
+                        <img class="w-100" src="{{asset('assets/web/img/carousel-1.webp')}}" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 900px;">
                                 <i class="fa fa-building fa-4x text-primary mb-4 d-none d-sm-block"></i>
@@ -75,7 +75,7 @@
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img class="w-100" src="{{asset('assets/web/img/carousel-2.jpg')}}" alt="Image">
+                        <img class="w-100" src="{{asset('assets/web/img/carousel-2.webp')}}" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 900px;">
                                 <i class="fa fa-tools fa-4x text-primary mb-4 d-none d-sm-block"></i>
