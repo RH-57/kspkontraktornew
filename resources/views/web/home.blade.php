@@ -382,7 +382,7 @@
                                 </div>
                             </div>
                             <h4 class="text-uppercase mb-3">{{$post->title}}</h4>
-                            <a class="text-uppercase fw-bold" href="{{ route('webarticles.show', $post->slug) }}" aria-label="Baca Artikel Terbaru Kami">Read More <i class="bi bi-arrow-right"></i></a>
+                            <a class="text-uppercase fw-bold" href="{{ route('webarticles.show', $post->slug) }}" aria-label="Baca Artikel Terbaru Kami">Baca Selengkapnya <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
