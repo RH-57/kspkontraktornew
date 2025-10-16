@@ -298,7 +298,7 @@
                             </span>
                         </a>
 
-                        <a class="portfolio-btn" href="{{ route('webprojects.show', $project->slug) }}">
+                        <a class="portfolio-btn" href="{{ route('webprojects.show', $project->slug) }}" aria-label="Lihat Detail Proyek">
                             <i class="bi bi-eye text-white"></i>
                         </a>
                     </div>
