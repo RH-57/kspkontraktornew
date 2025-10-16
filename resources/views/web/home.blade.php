@@ -196,7 +196,7 @@
                                 {{ $service->short_description }}
                             </p>
                             <a class="btn text-primary mt-auto" href="{{route('webservice.show' , $service->slug)}}" aria-label="Baca selengkapnya tentang {{ $service->title }}">
-                                Read More <i class="bi bi-arrow-right"></i>
+                                Baca Selengkapnya <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </div>
