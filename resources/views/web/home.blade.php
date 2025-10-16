@@ -131,7 +131,7 @@
                 </div>
                 <div class="col-lg-5 pb-5" style="min-height: 400px;">
                     <div class="position-relative bg-dark-radial h-100 ms-5">
-                        <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="{{asset('assets/web/img/about.jpg')}}" style="object-fit: cover;">
+                        <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="{{asset('assets/web/img/about.jpg')}}" style="object-fit: cover;" alt="About">
                     </div>
                 </div>
             </div>
@@ -195,7 +195,7 @@
                             <p class="flex-grow-1">
                                 {{ $service->short_description }}
                             </p>
-                            <a class="btn text-primary mt-auto" href="{{route('webservice.show' , $service->slug)}}">
+                            <a class="btn text-primary mt-auto" href="{{route('webservice.show' , $service->slug)}}" aria-label="Baca selengkapnya tentang {{ $service->title }}">
                                 Read More <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>

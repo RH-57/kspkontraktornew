@@ -13,7 +13,7 @@
                 <p><i class="fa fa-envelope me-2"></i>{{$contacts->email}}</p>
                 <div class="d-flex justify-content-start mt-4">
                     @foreach($sosmeds as $sosmed)
-                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2" href="{{$sosmed->url}}"><i class="fab {{$sosmed->icon}}"></i></a>
+                    <a class="btn btn-lg btn-primary btn-lg-square rounded-0 me-2"  aria-label="Kunjungi Media Sosial KSP Kontraktor" href="{{$sosmed->url}}"><i class="fab {{$sosmed->icon}}"></i></a>
                     @endforeach
                 </div>
             </div>
