@@ -187,24 +187,45 @@
             Paragraph,
             Bold,
             Italic,
-            Font
+            Font,
+            Table,
+            TableToolbar,
+            Alignment
         } from 'ckeditor5';
 
         ClassicEditor
-            .create( document.querySelector( '#editor' ), {
-                licenseKey: 'GPL', // bebas, karena kamu pakai versi GPL
-                plugins: [ Essentials, Paragraph, Bold, Italic, Font ],
+            .create(document.querySelector('#editor'), {
+                licenseKey: 'GPL',
+                plugins: [
+                    Essentials,
+                    Paragraph,
+                    Bold,
+                    Italic,
+                    Font,
+                    Table,
+                    TableToolbar,
+                    Alignment
+                ],
                 toolbar: [
-                    'undo', 'redo', '|', 'bold', 'italic', '|',
-                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor'
-                ]
-            } )
-            .then( editor => {
+                    'undo', 'redo', '|',
+                    'bold', 'italic', '|',
+                    'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', '|',
+                    'alignment', '|',
+                    'insertTable', 'tableColumn', 'tableRow', 'mergeTableCells'
+                ],
+                table: {
+                    contentToolbar: [
+                        'tableColumn', 'tableRow', 'mergeTableCells'
+                    ]
+                }
+            })
+            .then(editor => {
                 window.editor = editor;
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
     </script>
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
