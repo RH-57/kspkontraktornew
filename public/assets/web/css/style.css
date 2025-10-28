@@ -288,6 +288,39 @@
     }
 }
 
+/* RESPONSIVE FIX UNTUK MOBILE VIEW */
+@media (max-width: 768px) {
+    .portfolio-title {
+        height: auto;
+        bottom: -40px;
+        padding: 10px 15px;
+    }
+
+    .portfolio-title p {
+        font-size: 1rem; /* ukuran sedang untuk tablet */
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+}
+
+@media (max-width: 576px) {
+    .portfolio-title {
+        height: auto;
+        bottom: -30px;
+        padding: 8px 12px;
+    }
+
+    .portfolio-title p {
+        font-size: 0.9rem !important; /* kecilkan agar tetap muat di kotak */
+        line-height: 1.2;
+        word-wrap: break-word;
+    }
+
+    .portfolio-title span {
+        font-size: 0.8rem;
+    }
+}
+
 .footer-shape::before {
     position: absolute;
     content: "";
@@ -415,5 +448,11 @@
 
 .service-description table tr:nth-child(even) {
   background-color: #fdfdfd;
+}
+
+.service-description p {
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #444;
 }
 
