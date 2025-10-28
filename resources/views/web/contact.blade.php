@@ -50,17 +50,21 @@
             <div class="col-lg-6">
                 <div class="bg-light rounded shadow-sm p-4 h-100">
                     <div class="mb-3">
-                        <iframe class="w-100 rounded"
-                            src="{{ $contacts->maps }}"
-                            frameborder="0" style="border:0; height:300px;" allowfullscreen=""></iframe>
+                        <div class="ratio ratio-16x9 rounded">
+                            {!! $contacts->maps !!}
+                        </div>
                     </div>
+
                     <h5 class="text-uppercase fw-bold mb-2 text-dark">Alamat Kantor</h5>
                     <p class="mb-3">{{ $contacts->address }}</p>
-                    <a href="{{ $contacts->maps }}" target="_blank" class="btn btn-primary btn-sm text-uppercase px-4">
+
+                    <a href="https://maps.google.com" target="_blank" class="btn btn-primary btn-sm text-uppercase px-4">
                         <i class="fa fa-map-marker-alt me-2"></i>Lihat di Google Maps
                     </a>
                 </div>
             </div>
+
+
 
             <!-- RIGHT: Contact Info -->
             <div class="col-lg-6">
