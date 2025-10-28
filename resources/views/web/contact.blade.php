@@ -39,56 +39,72 @@
     @include('web.components.header')
     <!-- Navbar End -->
 
-    <!-- Page Header Start -->
-    <div class="container-fluid page-header">
-        <h1 class="display-3 text-uppercase text-white mb-3">Contact</h1>
-        <div class="d-inline-flex text-white">
-            <h6 class="text-uppercase m-0"><a href="">Home</a></h6>
-            <h6 class="text-white m-0 px-3">/</h6>
-            <h6 class="text-uppercase text-white m-0">Contact</h6>
-        </div>
-    </div>
-    <!-- Page Header Start -->
-
-    <!-- Contact Start -->
+    <!-- Contact Section Start -->
     <div class="container-fluid py-6 px-5">
         <div class="text-center mx-auto mb-5" style="max-width: 600px;">
-            <h1 class="display-5 text-uppercase mb-4">Hubungi Kami <span class="text-primary">Kapan Saja</span></h1>
+            <h1 class="display-5 text-uppercase mb-4">Hubungi <span class="text-primary">Kami</span></h1>
         </div>
-        <div class="row gx-0 align-items-center">
-            <div class="col-lg-6 mb-5 mb-lg-0" style="height: 600px;">
-                <iframe class="w-100 h-100"
-                    src="{{$contacts->maps}}"
-                    frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-            </div>
+
+        <div class="row g-5 align-items-start">
+            <!-- LEFT: Map + Address -->
             <div class="col-lg-6">
-                <div class="contact-form bg-light p-5">
-                      <form action="{{ route('webcontact.store') }}" method="POST">
-                        @csrf
-                        @honeypot
-                        <div class="row g-3">
-                            <div class="col-12 col-sm-6">
-                                <input type="text" name="name" class="form-control border-0" placeholder="Your Name" style="height: 55px;" required>
+                <div class="bg-light rounded shadow-sm p-4 h-100">
+                    <div class="mb-3">
+                        <iframe class="w-100 rounded"
+                            src="{{ $contacts->maps }}"
+                            frameborder="0" style="border:0; height:300px;" allowfullscreen=""></iframe>
+                    </div>
+                    <h5 class="text-uppercase fw-bold mb-2 text-dark">Alamat Kantor</h5>
+                    <p class="mb-3">{{ $contacts->address }}</p>
+                    <a href="{{ $contacts->maps }}" target="_blank" class="btn btn-primary btn-sm text-uppercase px-4">
+                        <i class="fa fa-map-marker-alt me-2"></i>Lihat di Google Maps
+                    </a>
+                </div>
+            </div>
+
+            <!-- RIGHT: Contact Info -->
+            <div class="col-lg-6">
+                <div class="bg-white rounded shadow-sm p-4 h-100">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <h5 class="text-uppercase fw-bold mb-3 text-dark">Kontak</h5>
+                            <p class="mb-2"><i class="bi bi-telephone text-primary me-2"></i>{{ $contacts->phone }}</p>
+                            <p class="mb-2"><i class="bi bi-envelope text-primary me-2"></i>{{ $contacts->email }}</p>
+                            <p class="mb-0"><i class="fab fa-whatsapp text-primary me-2"></i>
+                                <a href="https://wa.me/{{ $contacts->phone }}?text=Halo%20saya%20tertarik%20dengan%20layanan%20Anda"
+                                target="_blank" class="text-dark">Chat WhatsApp</a>
+                            </p>
+                        </div>
+
+                        <div class="col-md-6 mb-4">
+                            <h5 class="text-uppercase fw-bold mb-3 text-dark">Sosial Media</h5>
+                            @foreach($sosmeds as $sosmed)
+                            <p class="mb-2"><i class="fab {{$sosmed->icon}} text-primary me-2"></i><a href="{{$sosmed->url}}" target="_blank" aria-label="Kunjungi Media Sosial KSP Kontraktor">KSP Kontraktor</a></p>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="text-uppercase fw-bold mb-3 text-dark">Jam Operasional</h5>
+                            <div class="d-flex justify-content-between">
+                                <span>Senin – Jumat</span>
+                                <span>08.00 – 16.00</span>
                             </div>
-                            <div class="col-12 col-sm-6">
-                                <input type="email" name="email" class="form-control border-0" placeholder="Your Email" style="height: 55px;" required>
-                            </div>
-                            <div class="col-12">
-                                <input type="text" name="subject" class="form-control border-0" placeholder="Subject" style="height: 55px;" required>
-                            </div>
-                            <div class="col-12">
-                                <textarea name="message" class="form-control border-0" rows="4" placeholder="Message" required></textarea>
-                            </div>
-                            <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                            <div class="d-flex justify-content-between">
+                                <span>Sabtu</span>
+                                <span>08.00 – 12.00</span>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Contact End -->
+    <!-- Contact Section End -->
+
 
 
     <!-- Footer Start -->
