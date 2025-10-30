@@ -43,28 +43,20 @@
 
         <!-- Service Detail -->
         <div class="container py-6">
-            <div class="row g-5 ">
-                <div class="col-lg-6">
-                    <img src="{{ asset('storage/' . $service->image) }}"
-                         alt="{{ $service->title }}"
-                         class="img-fluid rounded shadow-lg"
-                         style="object-fit: cover; width: 100%; max-height: 450px;">
-                </div>
-                <div class="col-lg-6">
-                    <div class="mb-4">
-                        <span class="badge bg-primary text-uppercase px-3 py-2 mb-3">
-                            <i class="fas {{ $service->icon }}"></i> Service
-                        </span>
-                        <h2 class="fw-bold">{{ $service->title }}</h2>
-                    </div>
-                    <div class="service-description">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+
+                    <div class="service-description px-3 px-md-5">
                         {!! $service->description !!}
                     </div>
-                    <a href="https://wa.me/{{ $contacts->phone }}?text=Halo%20saya%20tertarik%20dengan%20layanan%20{{ urlencode($service->title) }}"
-                       target="_blank"
-                       class="btn btn-primary mt-4 px-4 py-2">
-                        <i class="fab fa-whatsapp me-2"></i> Konsultasi via WhatsApp
-                    </a>
+
+                    <div class="text-center mt-5">
+                        <a href="https://wa.me/{{ $contacts->phone }}?text=Halo%20saya%20tertarik%20dengan%20layanan%20{{ urlencode($service->title) }}"
+                        target="_blank"
+                        class="btn btn-primary px-4 py-2 shadow-sm">
+                            <i class="fab fa-whatsapp me-2"></i> Konsultasi via WhatsApp
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
