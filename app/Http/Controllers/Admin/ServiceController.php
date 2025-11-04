@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
@@ -15,7 +16,9 @@ use Intervention\Image\Encoders\WebpEncoder;
 class ServiceController extends Controller
 {
     public function index() {
-        $services = Service::withoutTrashed()->get();
+        $services = Cache::remember('services', 3600, function() {
+            return Service::withoutTrashed()->get();
+        });
         return view('admin.services.index', compact('services'));
     }
 
@@ -83,6 +86,8 @@ class ServiceController extends Controller
             'meta_image'        => $metaImagePath,
             'canonical_url'     => $canonicalUrl,
         ]);
+
+        Cache::forget('services');
 
         return redirect()->route('services.index')->with(['success' => 'Service created successfully']);
     }
@@ -177,6 +182,8 @@ class ServiceController extends Controller
             'canonical_url'     => $canonicalUrl,
         ]);
 
+        Cache::forget('services');
+
         return redirect()->route('services.index')->with(['success' => 'Service updated successfully']);
     }
 
@@ -184,6 +191,8 @@ class ServiceController extends Controller
     public function destroy($id) {
         $service = Service::findOrFail($id);
         $service->delete();
+
+        Cache::forget('services');
 
         return redirect()->route('services.index')->with('success', 'Service Deleted Successfully');
     }

@@ -7,6 +7,7 @@ use App\Models\ProjectImage;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Encoders\WebpEncoder;
@@ -15,7 +16,9 @@ use Intervention\Image\ImageManager;
 class ProjectController extends Controller
 {
     public function index() {
-        $projects = Project::with('images')->latest()->get();
+        $projects = Cache::remember('projects', 3600, function () {
+            return Project::with('images')->latest()->get();
+        });
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -106,6 +109,8 @@ class ProjectController extends Controller
                 ]);
             }
         }
+
+        Cache::forget('projects');
 
         return redirect()->route('projects.index')->with('success', 'Project Created Successfully');
     }
@@ -211,6 +216,8 @@ class ProjectController extends Controller
             }
         }
 
+        Cache::forget('projects');
+
         return redirect()->route('projects.show', $project->slug)
             ->with('success', 'Project updated successfully!');
     }
@@ -222,6 +229,8 @@ class ProjectController extends Controller
         }
 
         $project->delete();
+
+        Cache::forget('projects');
         return redirect()->route('projects.index')->with('success', 'Project Deleted Successfully');
     }
 }

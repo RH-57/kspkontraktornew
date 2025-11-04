@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\PostCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class PostCategoryController
 {
     public function index() {
-        $post_categories = PostCategory::get();
+        $post_categories = Cache::remember('post_categories', 3600, function() {
+            return PostCategory::get();
+        });
 
         return view('admin.posts.categories.index', compact('post_categories'));
     }
@@ -32,6 +35,8 @@ class PostCategoryController
             'slug'          => $slug,
             'description'   => $request->description,
         ]);
+
+        Cache::forget('post_categories');
 
         return redirect()->route('categories.index')->with('success', 'Post Category Created Successfully');
     }
@@ -62,12 +67,16 @@ class PostCategoryController
             'description'   => $request->description,
         ]);
 
+        Cache::forget('post_categories');
+
         return redirect()->route('categories.edit', $post_category->id)->with('success', 'Post Category Updated Successfully');
     }
 
     public function destroy($id) {
         $post_category = PostCategory::findOrFail($id);
         $post_category->delete();
+
+        Cache::forget('post_categories');
 
         return redirect()->route('categories.index')->with('success', 'Post Category Deleted Successfully');
     }

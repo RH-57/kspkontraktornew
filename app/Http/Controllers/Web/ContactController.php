@@ -7,13 +7,18 @@ use App\Models\MediaSocial;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Cache;
 
 class ContactController
 {
     public function index()
     {
-        $contacts = Contact::first();
-        $sosmeds  = MediaSocial::get();
+        $contacts = Cache::remember('contacts', 3600, function () {
+            return Contact::first();
+        });
+        $sosmeds  = Cache::remember('mediasocials', 3600, function () {
+            return MediaSocial::get();
+        });
 
         return view('web.contact', compact('contacts', 'sosmeds'));
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\MediaSocial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class MediaSocialController
 {
@@ -19,6 +20,8 @@ class MediaSocialController
             'url'   => $request->url,
             'icon'  => $request->icon,
         ]);
+
+        Cache::forget('mediasocials');
 
         return redirect()->back()->with('success', 'Add Social Media Successfully');
     }
@@ -37,6 +40,8 @@ class MediaSocialController
             'icon'  => $request->icon,
         ]);
 
+        Cache::forget('mediasocials');
+
         return redirect()->back()->with('success', 'Social Media Updated Successfully');
     }
 
@@ -44,6 +49,8 @@ class MediaSocialController
         $mediasocial = MediaSocial::findOrFail($id);
 
         $mediasocial->delete();
+
+        Cache::forget('mediasocials');
 
         return redirect()->back()->with('success', 'Add Social Media Deleted Successfully');
     }

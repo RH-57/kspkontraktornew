@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -56,6 +57,8 @@ class TestimonialController
             'image'             => $imagePath,
         ]);
 
+        Cache::forget('testimonials');
+
         return redirect()->route('testimonials.index')->with('success', 'Testimonial Created Successfully');
     }
 
@@ -105,12 +108,16 @@ class TestimonialController
             'image'             => $imagePath,
         ]);
 
+        Cache::forget('testimonials');
+
         return redirect()->route('testimonials.edit', $id)->with('success', 'Testimonial Updated Successfully');
     }
 
     public function destroy($id) {
         $testimonial = Testimonial::findOrFail($id);
         $testimonial->delete();
+
+        Cache::forget('testimonials');
 
         return redirect()->route('testimonials.index')->with('success', 'Testimonial Deleted Successfully');
     }

@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Procedure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ProcedureController
 {
     public function index() {
-        $procedures = Procedure::orderBy('no')->get();
+        $procedures = Cache::remember('procedures', 3600, function() {
+            return Procedure::orderBy('no')->get();
+        });
 
         return view('admin.procedures.index', compact('procedures'));
     }

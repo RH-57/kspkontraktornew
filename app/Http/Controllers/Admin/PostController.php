@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Encoders\WebpEncoder;
@@ -114,6 +115,8 @@ class PostController
             'published_at'     => $request->status === 'published' ? now() : null,
         ]);
 
+        Cache::forget('posts');
+
         return redirect()->route('posts.index')->with('success', 'Post berhasil dibuat.');
     }
 
@@ -174,6 +177,8 @@ class PostController
             'featured_image'    => $post->featured_image,
         ]);
 
+        Cache::forget('posts');
+
         return redirect()->route('posts.index')->with('success', 'Post berhasil diperbarui.');
     }
 
@@ -182,6 +187,8 @@ class PostController
     {
        // Soft delete hanya hapus dari database (set deleted_at)
     $post->delete();
+
+    Cache::forget('posts');
 
     return redirect()->route('posts.index')->with('success', 'Post moved to trash!');
     }
