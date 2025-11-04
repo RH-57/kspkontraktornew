@@ -36,7 +36,7 @@
     <div class="container-fluid bg-dark bg-light-radial text-white border-top border-primary px-0">
         <div class="d-flex flex-column flex-md-row justify-content-between">
             <div class="py-4 px-5 text-center text-md-start">
-                <p class="mb-0">&copy; <a class="text-primary" href="#">kspkontraktor.com</a>. All Rights Reserved.</p>
+                <p class="mb-0">&copy; <a class="text-primary" href="#">kspkontraktor.com</a>. All Rights Reserved.  Made by <a href="https://liradigi.id" target="_blank">LiraDigi.</p>
             </div>
             <div class="py-4 px-5 bg-primary footer-shape position-relative text-center text-md-end">
                 <p class="mb-0" hidden>Designed by <a class="text-dark" href="https://htmlcodex.com" hidden>HTML Codex</a></p>
