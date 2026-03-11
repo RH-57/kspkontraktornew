@@ -58,7 +58,7 @@
                         href="https://wa.me/{{$contacts->phone}}?text=Saya%20tertarik%20dengan%20layanan%20Anda.%20Bisa%20minta%20penawaran?"
                         class="nav-item nav-link bg-primary text-white px-5 ms-3 d-none d-lg-block"
                         target="_blank">
-                        Get A Quote
+                        Hubungi Kami
                         <i class="bi bi-arrow-right"></i>
                     </a>
                 </div>

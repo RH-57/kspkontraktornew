@@ -143,7 +143,7 @@
                 </div>
                 <div class="col-lg-5 pb-5" style="min-height: 400px;">
                     <div class="position-relative bg-dark-radial h-100 ms-5">
-                        <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="{{asset('assets/web/img/about.webp')}}" style="object-fit: cover;" alt="About">
+                        <img class="position-absolute w-100 h-100 mt-5 ms-n5" src="{{asset('assets/web/img/carousel-1.webp')}}" style="object-fit: cover;" alt="About">
                     </div>
                 </div>
             </div>
@@ -318,6 +318,13 @@
             @endforeach
         </div>
 
+        <div class="text-center mt-5">
+            <a href="{{route('projects')}}" class="btn btn-primary btn-lg px-3 py-2">
+                Lihat Lebih Banyak
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+
         </div>
         <!-- Portfolio End -->
 
@@ -399,6 +406,12 @@
                     </div>
                 </div>
                 @endforeach
+            </div>
+            <div class="text-center mt-5">
+                <a href="{{route('articles')}}" class="btn btn-primary btn-lg px-3 py-2">
+                    Lihat Lebih Banyak
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
             </div>
         </div>
 

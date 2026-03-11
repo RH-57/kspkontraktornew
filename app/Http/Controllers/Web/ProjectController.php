@@ -19,7 +19,7 @@ class ProjectController
             return MediaSocial::get();
         });
         $projects = Cache::remember('projects', 3600, function() {
-            return Project::with('images')->orderByDesc('year')->take(6)->get();
+            return Project::with('images')->orderByDesc('year')->get();
         });
         $testimonials = Cache::remember('testimonials', 3600, function() {
             return Testimonial::get();

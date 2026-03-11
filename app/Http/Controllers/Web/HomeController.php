@@ -24,7 +24,7 @@ class HomeController
         $services = Cache::remember('services', 3600, function() {
             return Service::where('status', '1')->get();
         });
-        $projects = Cache::remember('projects', 3600, function() {
+        $projects = Cache::remember('projects_front', 3600, function() {
             return Project::with('images')->orderByDesc('year')->take(6)->get();
         });
         $testimonials = Cache::remember('testimonials', 3600, function() {

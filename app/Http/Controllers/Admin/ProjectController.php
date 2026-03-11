@@ -111,6 +111,7 @@ class ProjectController extends Controller
         }
 
         Cache::forget('projects');
+        Cache::forget('projects_front');
 
         return redirect()->route('projects.index')->with('success', 'Project Created Successfully');
     }
@@ -217,6 +218,7 @@ class ProjectController extends Controller
         }
 
         Cache::forget('projects');
+        Cache::forget('projects_front');
 
         return redirect()->route('projects.show', $project->slug)
             ->with('success', 'Project updated successfully!');
@@ -231,6 +233,7 @@ class ProjectController extends Controller
         $project->delete();
 
         Cache::forget('projects');
+        Cache::forget('projects_front');
         return redirect()->route('projects.index')->with('success', 'Project Deleted Successfully');
     }
 }
