@@ -91,7 +91,8 @@
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 900px;">
                                 <i class="fa fa-tools fa-4x text-primary mb-4 d-none d-sm-block"></i>
-                                <h1 class="text-uppercase text-white mb-md-4">Spesialis Kontraktor Konstruksi Gudang, Pabrik, Rumah & Lapangan.</h1>
+                                <h1 class="text-uppercase text-white mb-md-2">Kontraktor Gudang, Pabrik & Struktur Baja</h1>
+                                <p class="text-muted mb-4">Integrated construction solution for Business & Industry.</p>
                                 <a href="https://wa.me/{{$contacts->phone}}?text=Saya%20ingin%20konsultasi%20dengan%20Anda%20tentang%20jasa%20kontraktor?" target="_blank" class="btn btn-primary py-md-3 px-md-5 mt-2">Konsultasi Gratis</a>
                             </div>
                         </div>
@@ -238,8 +239,8 @@
                 <div class="col-lg-4 col-md-6 text-center">
                     <div class="feature-box p-4 shadow-sm rounded bg-white h-100">
                         <i class="fas fa-money-bill-wave fa-3x text-primary mb-3"></i>
-                        <h5 class="fw-bold">Harga Murah</h5>
-                        <p class="text-muted mb-0">Solusi terbaik dengan biaya yang tetap terjangkau.</p>
+                        <h5 class="fw-bold">Biaya Kompetitif</h5>
+                        <p class="text-muted mb-0">Perencanaan biaya yang efisien dan transparan sesuai kebutuhan proyek.</p>
                     </div>
                 </div>
 
